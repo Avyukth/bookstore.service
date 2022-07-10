@@ -18,8 +18,8 @@ func Connect() {
 		DontSupportRenameColumn:   true,                                                                       // `change` when rename column, rename column not supported before MySQL 8, MariaDB
 		SkipInitializeWithVersion: false,                                                                      // auto configure based on currently MySQL version
 	}), &gorm.Config{})
-	if error != nil {
-		panic(error)
+	if err != nil {
+		panic(err)
 	}
 
 }

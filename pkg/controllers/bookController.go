@@ -3,16 +3,17 @@ package controllers
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/avyukth/bookstore.service/models"
-	"github.com/avyukth/bookstore.service/utils"
-	"github.com/gorilla/mux"
 	"net/http"
 	"strconv"
+
+	"bookstore.service/pkg/models"
+	"bookstore.service/pkg/utils"
+	"github.com/gorilla/mux"
 )
 
 var NewBook models.Book
 
-func GetBook(w http.ResposeWriter, r *http.Request) {
+func GetBook(w http.ResponseWriter, r *http.Request) {
 	newBooks := models.GetAllBooks()
 	res, _ := json.Marshal(newBooks)
 	w.Header().Set("Content-Type", "pkglication/json")
@@ -20,7 +21,7 @@ func GetBook(w http.ResposeWriter, r *http.Request) {
 	w.Write(res)
 }
 
-func GetBookById(w http.ResposeWriter, r *http.Request) {
+func GetBookById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	bookId := vars["bookId"]
 	Id, error := strconv.ParseInt(bookId, 0, 0)
@@ -34,7 +35,7 @@ func GetBookById(w http.ResposeWriter, r *http.Request) {
 	w.Write(res)
 }
 
-func CreateBook(w http.ResposeWriter, r *http.Request) {
+func CreateBook(w http.ResponseWriter, r *http.Request) {
 	createBook := &models.Book{}
 	utils.ParseBody(r, createBook)
 	b := createBook.CreateBook()
@@ -44,7 +45,7 @@ func CreateBook(w http.ResposeWriter, r *http.Request) {
 	w.Write(res)
 }
 
-func DeleteBookById(w http.ResposeWriter, r *http.Request) {
+func DeleteBookById(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	bookId := vars["bookId"]
 	Id, error := strconv.ParseInt(bookId, 0, 0)
@@ -58,7 +59,7 @@ func DeleteBookById(w http.ResposeWriter, r *http.Request) {
 	w.Write(res)
 }
 
-func UpdateBook(w http.ResposeWriter, r *http.Request) {
+func UpdateBook(w http.ResponseWriter, r *http.Request) {
 	var updateBook = &models.Book{}
 	utils.ParseBody(r, updateBook)
 	vars := mux.Vars(r)
