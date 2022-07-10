@@ -10,7 +10,7 @@ var (
 )
 
 func Connect() {
-	db, err := gorm.Open(mysql.New(mysql.Config{
+	d, err := gorm.Open(mysql.New(mysql.Config{
 		DSN:                       "gorm:gorm@tcp(127.0.0.1:3306)/gorm?charset=utf8&parseTime=True&loc=Local", // data source name
 		DefaultStringSize:         256,                                                                        // default size for string fields
 		DisableDatetimePrecision:  true,                                                                       // disable datetime precision, which not supported before MySQL 5.6
@@ -21,6 +21,7 @@ func Connect() {
 	if err != nil {
 		panic(err)
 	}
+	db=d
 
 }
 
